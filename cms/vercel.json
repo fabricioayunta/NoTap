@@ -2,7 +2,8 @@
   "framework": null,
   "outputDirectory": "public",
   "rewrites": [
-    { "source": "/paneladmin", "destination": "/paneladmin/index.html" }
+    { "source": "/paneladmin", "destination": "/paneladmin/index.html" },
+    { "source": "/api/:ruta*", "destination": "/api/index?ruta=:ruta*" }
   ],
   "headers": [
     {
