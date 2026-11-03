@@ -12,21 +12,34 @@ const S = require("./stock");
 
 let pool = null;
 
+/** Interpreta DATABASE_URL de forma tolerante: acepta contraseñas con símbolos (@, #, /, %) y corchetes de más. */
+function parsearConexion(url) {
+  url = String(url || "").trim();
+  const m = /^postgres(?:ql)?:\/\/([^:\/@]+):(.*)@([^@\/?#:]+)(?::(\d+))?\/([^?#]*)/.exec(url);
+  if (!m) return { connectionString: url.replace(/([?&])sslmode=[^&]*&?/, "$1").replace(/[?&]$/, "") };
+  let pass = m[2];
+  if (/^\[.*\]$/.test(pass)) pass = pass.slice(1, -1); // [YOUR-PASSWORD] con corchetes
+  try { if (/%[0-9a-fA-F]{2}/.test(pass)) pass = decodeURIComponent(pass); } catch (e) { /* se deja como está */ }
+  let user = m[1];
+  try { user = decodeURIComponent(user); } catch (e) { /* se deja como está */ }
+  return { user: user, password: pass, host: m[3], port: m[4] ? Number(m[4]) : 5432, database: m[5] || "postgres" };
+}
+
 function getPool() {
   if (pool) return pool;
-  let url = process.env.DATABASE_URL;
+  const url = process.env.DATABASE_URL;
   if (!url) {
     throw new Error("Falta la variable DATABASE_URL (la conexión a la base de datos de Supabase).");
   }
-  // Supabase exige SSL; quitamos sslmode de la URL para controlarlo desde acá.
-  url = url.replace(/([?&])sslmode=[^&]*&?/, "$1").replace(/[?&]$/, "");
-  const local = /@(localhost|127\.0\.0\.1)(:|\/)/.test(url);
-  pool = new Pool({
-    connectionString: url,
+  const conf = parsearConexion(url);
+  const host = conf.host || "";
+  const local = host === "localhost" || host === "127.0.0.1" || /@(localhost|127\.0\.0\.1)(:|\/)/.test(url);
+  pool = new Pool(Object.assign({
     max: process.env.VERCEL ? 1 : 5,
     idleTimeoutMillis: 10000,
+    connectionTimeoutMillis: 10000,
     ssl: local ? false : { rejectUnauthorized: false }
-  });
+  }, conf));
   pool.on("error", function (e) { console.error("Error en la conexión a la base:", e.message); });
   return pool;
 }
@@ -97,6 +110,7 @@ async function asegurarEsquema() {
 }
 
 module.exports = {
+  parsearConexion: parsearConexion,
   query: query,
   tx: tx,
   asegurarEsquema: asegurarEsquema,

@@ -269,7 +269,12 @@ async function manejarAPI(req, res, url) {
     const msg = err && err.message && /^Falta /.test(err.message)
       ? err.message
       : "No se pudo completar la operación. Revisá la conexión con la base de datos.";
-    if (!res.headersSent) return enviarJSON(res, 500, { error: msg });
+    if (!res.headersSent) {
+      const cuerpo = { error: msg };
+      // Solo si se activa NOTAPP_DEBUG=1 en Vercel: muestra el motivo real (para diagnosticar la conexión).
+      if (process.env.NOTAPP_DEBUG === "1") cuerpo.detalle = (err && err.code ? err.code + ": " : "") + (err && err.message ? err.message : String(err));
+      return enviarJSON(res, 500, cuerpo);
+    }
     res.end();
   }
 }
