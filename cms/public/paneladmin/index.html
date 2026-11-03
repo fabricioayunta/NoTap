@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de administración — NotApp</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="/paneladmin/css/admin.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-shell">
+
+  <aside class="admin-sidebar">
+    <div class="admin-brand">Not<span>App</span></div>
+    <p class="admin-brand-sub">Panel de administración</p>
+
+    <nav class="admin-nav">
+      <button type="button" class="admin-nav-item active" data-view="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
+        Dashboard
+      </button>
+      <button type="button" class="admin-nav-item" data-view="productos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 8l-8-5-8 5v8l8 5 8-5z"/><path d="M4 8l8 5 8-5M12 13v8"/></svg>
+        Productos
+      </button>
+      <button type="button" class="admin-nav-item" data-view="stock">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 4v16"/></svg>
+        Stock
+        <span class="nav-badge" id="navStockBadge" hidden></span>
+      </button>
+      <button type="button" class="admin-nav-item" data-view="categorias">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg>
+        Categorías
+      </button>
+      <button type="button" class="admin-nav-item" data-view="config">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.6V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.6 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.6 1z"/></svg>
+        Configuración
+      </button>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <div class="admin-user" id="adminUserEmail"></div>
+      <button type="button" class="admin-logout" id="logoutBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>
+        Cerrar sesión
+      </button>
+      <a href="/index.html" target="_blank" class="admin-view-site">Ver sitio público ↗</a>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+
+    <!-- ================= DASHBOARD ================= -->
+    <section class="admin-view" id="view-dashboard">
+      <header class="admin-view-header">
+        <h1>Dashboard</h1>
+        <p>Resumen general de tu catálogo.</p>
+      </header>
+
+      <div class="stock-alert" id="alertaStock" hidden></div>
+
+      <div class="stats-grid" id="statsGrid"></div>
+
+      <div class="admin-card reponer-card" id="reponerCard" hidden>
+        <h2>Para reponer</h2>
+        <p class="admin-card-hint">Combinaciones de talle y color que llegaron al nivel de stock bajo o se agotaron.</p>
+        <div id="listaReponer"></div>
+      </div>
+
+      <div class="dashboard-actions">
+        <h2>Accesos rápidos</h2>
+        <div class="quick-links">
+          <button type="button" class="quick-link" data-view="productos" data-action="nuevo-producto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+            Agregar producto
+          </button>
+          <button type="button" class="quick-link" data-view="categorias" data-action="nueva-categoria">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+            Agregar categoría
+          </button>
+          <button type="button" class="quick-link" data-view="config">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 16l4-4 4 4 8-8"/></svg>
+            Cambiar logo / WhatsApp
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PRODUCTOS ================= -->
+    <section class="admin-view" id="view-productos" hidden>
+      <header class="admin-view-header">
+        <h1>Productos</h1>
+        <p>Administrá el catálogo completo.</p>
+        <button type="button" class="btn-admin btn-admin-primary" id="btnNuevoProducto">+ Agregar producto</button>
+      </header>
+
+      <div class="admin-toolbar">
+        <input type="search" id="filtroProductos" placeholder="Buscar producto…" class="admin-input admin-input-search">
+        <select id="filtroCategoriaProductos" class="admin-select"></select>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Nombre</th>
+              <th>Categoría</th>
+              <th>Casillero</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Disponibilidad</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaProductos"></tbody>
+        </table>
+      </div>
+      <p class="admin-empty" id="productosVacio" hidden>No hay productos que coincidan con la búsqueda.</p>
+    </section>
+
+    <!-- ================= STOCK ================= -->
+    <section class="admin-view" id="view-stock" hidden>
+      <header class="admin-view-header">
+        <h1>Stock por casillero</h1>
+        <p>Cantidad disponible de cada talle y color. Cambiá el número y se guarda solo.</p>
+      </header>
+
+      <div class="admin-toolbar">
+        <input type="search" id="filtroStock" placeholder="Buscar producto o casillero…" class="admin-input admin-input-search">
+        <select id="filtroEstadoStock" class="admin-select">
+          <option value="todos">Todos</option>
+          <option value="bajo">Solo stock bajo y agotado</option>
+          <option value="sin">Solo agotado</option>
+        </select>
+      </div>
+
+      <div id="stockContenido"></div>
+      <p class="admin-empty" id="stockVacio" hidden>No hay productos que coincidan.</p>
+    </section>
+
+    <!-- ================= CATEGORÍAS ================= -->
+    <section class="admin-view" id="view-categorias" hidden>
+      <header class="admin-view-header">
+        <h1>Categorías</h1>
+        <p>Se usan en el menú "Productos" y en los filtros del catálogo.</p>
+        <button type="button" class="btn-admin btn-admin-primary" id="btnNuevaCategoria">+ Agregar categoría</button>
+      </header>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Productos</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaCategorias"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= CONFIGURACIÓN ================= -->
+    <section class="admin-view" id="view-config" hidden>
+      <header class="admin-view-header">
+        <h1>Configuración del sitio</h1>
+        <p>Logo, datos de contacto y seguridad de tu cuenta.</p>
+      </header>
+
+      <div class="config-grid">
+
+        <div class="admin-card">
+          <h2>Logo</h2>
+          <p class="admin-card-hint">Se muestra en el navbar y el footer del sitio público. Si no subís uno, se usa el texto "NotApp".</p>
+          <div class="logo-preview-wrap">
+            <div class="logo-preview" id="logoPreview">
+              <span>Sin logo</span>
+            </div>
+          </div>
+          <div class="admin-actions-row">
+            <label class="btn-admin btn-admin-outline">
+              Subir logo
+              <input type="file" accept="image/*" id="logoInput" hidden>
+            </label>
+            <button type="button" class="btn-admin btn-admin-ghost" id="btnQuitarLogo">Quitar logo</button>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h2>Stock</h2>
+          <form id="formStock">
+            <label class="field">
+              <span>Avisar cuando queden</span>
+              <input type="number" id="configStockBajo" class="admin-input" min="0" step="1" required>
+            </label>
+            <p class="admin-card-hint">Se avisa cuando una combinación de talle y color tiene esta cantidad <strong>o menos</strong>. Es el valor general: cada producto puede tener el suyo (en Editar producto).</p>
+            <button type="submit" class="btn-admin btn-admin-primary">Guardar</button>
+            <span class="admin-save-msg" id="stockSaveMsg"></span>
+          </form>
+        </div>
+
+        <div class="admin-card">
+          <h2>Datos del sitio</h2>
+          <form id="formConfig">
+            <label class="field">
+              <span>Nombre del sitio</span>
+              <input type="text" id="configNombre" class="admin-input" required>
+            </label>
+            <label class="field">
+              <span>Número de WhatsApp (formato local, sin 0 ni 15)</span>
+              <input type="text" id="configWhatsapp" class="admin-input" placeholder="1151760505" required>
+            </label>
+            <p class="admin-card-hint">Este número se usa para armar todos los enlaces de consulta del catálogo.</p>
+            <button type="submit" class="btn-admin btn-admin-primary">Guardar cambios</button>
+            <span class="admin-save-msg" id="configSaveMsg"></span>
+          </form>
+        </div>
+
+        <div class="admin-card">
+          <h2>Seguridad</h2>
+          <p class="admin-card-hint">Cambiá tu contraseña de acceso al panel.</p>
+          <form id="formPassword">
+            <label class="field">
+              <span>Contraseña actual</span>
+              <input type="password" id="passwordActual" class="admin-input" required autocomplete="current-password">
+            </label>
+            <label class="field">
+              <span>Contraseña nueva</span>
+              <input type="password" id="passwordNueva" class="admin-input" required minlength="8" autocomplete="new-password">
+            </label>
+            <p class="admin-card-hint">Mínimo 8 caracteres.</p>
+            <button type="submit" class="btn-admin btn-admin-primary">Cambiar contraseña</button>
+            <span class="admin-save-msg" id="passwordSaveMsg"></span>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ================= MODAL: Producto ================= -->
+<div class="admin-modal-backdrop" id="modalProducto" hidden>
+  <div class="admin-modal admin-modal-lg">
+    <div class="admin-modal-header">
+      <h2 id="modalProductoTitulo">Agregar producto</h2>
+      <button type="button" class="admin-modal-close" data-close-modal>&times;</button>
+    </div>
+    <form id="formProducto" class="admin-modal-body">
+      <input type="hidden" id="productoId">
+
+      <div class="form-grid-2">
+        <label class="field">
+          <span>Nombre del producto</span>
+          <input type="text" id="pNombre" class="admin-input" required>
+        </label>
+        <label class="field">
+          <span>Categoría</span>
+          <select id="pCategoria" class="admin-select" required></select>
+        </label>
+      </div>
+
+      <div class="form-grid-2">
+        <label class="field">
+          <span>Precio</span>
+          <input type="number" id="pPrecio" class="admin-input" min="0" step="1" required>
+        </label>
+        <label class="field checkbox-row">
+          <input type="checkbox" id="pDisponible" checked>
+          <span>Disponible</span>
+        </label>
+        <label class="field checkbox-row">
+          <input type="checkbox" id="pDestacado">
+          <span>Destacado en la home</span>
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Descripción corta (se ve en la tarjeta/listado)</span>
+        <input type="text" id="pDescripcionCorta" class="admin-input" maxlength="140">
+      </label>
+
+      <label class="field">
+        <span>Descripción completa (ficha del producto)</span>
+        <textarea id="pDescripcion" class="admin-input" rows="4"></textarea>
+      </label>
+
+      <div class="field">
+        <span>Talles disponibles</span>
+        <div class="tag-input" id="tallesInput">
+          <div class="tag-list" id="tallesList"></div>
+          <input type="text" id="tallesNuevo" placeholder="Escribí un talle y Enter (ej: A2)">
+        </div>
+      </div>
+
+      <div class="field">
+        <span>Colores disponibles</span>
+        <div class="color-list" id="coloresList"></div>
+        <button type="button" class="btn-admin btn-admin-outline btn-admin-sm" id="btnAgregarColor">+ Agregar color</button>
+      </div>
+
+      <div class="stock-box">
+        <h3>Casillero y stock</h3>
+        <div class="form-grid-2">
+          <label class="field">
+            <span>Casillero (ej: A4, C2)</span>
+            <input type="text" id="pCasillero" class="admin-input" maxlength="12" placeholder="A4">
+          </label>
+          <label class="field">
+            <span>Stock bajo de este producto</span>
+            <input type="number" id="pStockMinimo" class="admin-input" min="0" step="1" placeholder="">
+            <small class="field-hint" id="pStockMinimoHint"></small>
+          </label>
+        </div>
+        <div class="field">
+          <span>Cantidad por talle y color</span>
+          <div id="stockGrid" class="stock-grid"></div>
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="field">
+          <span>Imagen principal</span>
+          <div class="image-drop" id="imagenPrincipalDrop">
+            <div class="image-drop-preview" id="imagenPrincipalPreview">
+              <span>Sin imagen</span>
+            </div>
+            <label class="btn-admin btn-admin-outline btn-admin-sm">
+              Subir imagen
+              <input type="file" accept="image/*" id="imagenPrincipalInput" hidden>
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <span>Galería (fotos adicionales)</span>
+          <div class="gallery-grid" id="galeriaGrid"></div>
+          <label class="btn-admin btn-admin-outline btn-admin-sm">
+            + Agregar imagen a la galería
+            <input type="file" accept="image/*" id="galeriaInput" hidden>
+          </label>
+        </div>
+      </div>
+
+      <p class="admin-form-error" id="productoFormError" hidden></p>
+
+      <div class="admin-modal-footer">
+        <button type="button" class="btn-admin btn-admin-ghost" data-close-modal>Cancelar</button>
+        <button type="submit" class="btn-admin btn-admin-primary" id="btnGuardarProducto">Guardar producto</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ================= MODAL: Categoría ================= -->
+<div class="admin-modal-backdrop" id="modalCategoria" hidden>
+  <div class="admin-modal">
+    <div class="admin-modal-header">
+      <h2 id="modalCategoriaTitulo">Agregar categoría</h2>
+      <button type="button" class="admin-modal-close" data-close-modal>&times;</button>
+    </div>
+    <form id="formCategoria" class="admin-modal-body">
+      <input type="hidden" id="categoriaId">
+      <label class="field">
+        <span>Nombre de la categoría</span>
+        <input type="text" id="categoriaNombre" class="admin-input" required>
+      </label>
+      <p class="admin-form-error" id="categoriaFormError" hidden></p>
+      <div class="admin-modal-footer">
+        <button type="button" class="btn-admin btn-admin-ghost" data-close-modal>Cancelar</button>
+        <button type="submit" class="btn-admin btn-admin-primary">Guardar categoría</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ================= MODAL: Confirmar eliminación ================= -->
+<div class="admin-modal-backdrop" id="modalConfirmar" hidden>
+  <div class="admin-modal admin-modal-sm">
+    <div class="admin-modal-header">
+      <h2 id="confirmarTitulo">¿Eliminar?</h2>
+      <button type="button" class="admin-modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="admin-modal-body">
+      <p id="confirmarTexto">Esta acción no se puede deshacer.</p>
+      <p class="admin-form-error" id="confirmarError" hidden></p>
+      <div class="admin-modal-footer">
+        <button type="button" class="btn-admin btn-admin-ghost" data-close-modal>Cancelar</button>
+        <button type="button" class="btn-admin btn-admin-danger" id="confirmarBtn">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="admin-toast" id="adminToast" hidden></div>
+
+<script src="/paneladmin/js/admin.js" data-page="dashboard"></script>
+</body>
+</html>

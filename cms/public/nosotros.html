@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosotros — NotApp</title>
+<meta name="description" content="Conocé NotApp: un catálogo online pensado por y para practicantes de Jiu-Jitsu.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">Not<span>App</span></a>
+
+    <nav class="main-nav" id="mainNav">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li class="has-dropdown">
+          <a href="catalogo.html" class="dropdown-toggle">Productos <span class="chevron">▼</span></a>
+          <ul class="dropdown" id="navDropdown">
+            <li><a href="catalogo.html">Ver todos</a></li>
+            <li class="dropdown-divider"></li>
+          </ul>
+        </li>
+        <li><a href="nosotros.html" class="active">Nosotros</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <form class="nav-search" role="search" data-nav-search>
+      <label for="navSearchInput" class="visually-hidden">Buscar productos</label>
+      <input id="navSearchInput" type="search" placeholder="Buscar productos…">
+      <button type="submit" aria-label="Buscar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+    </form>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-header">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Ruta de navegación">
+        <a href="index.html">Inicio</a><span class="sep">/</span><span class="current">Nosotros</span>
+      </nav>
+      <h1>Hecho por gente que entrena</h1>
+      <p>NotApp nació de la necesidad de encontrar equipamiento de calidad sin vueltas: un catálogo claro, con información real de cada producto, y una forma simple de consultar antes de comprar.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="split-block">
+        <div class="split-visual">
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M35 18 L50 28 L65 18 L78 30 L68 42 L68 85 L32 85 L32 42 L22 30 Z"/><path d="M50 28 L50 50"/></svg>
+        </div>
+        <div>
+          <h2>Nuestra historia</h2>
+          <p>Empezamos armando este catálogo para resolver algo simple: mostrar el equipamiento de forma clara, con fotos, talles y colores reales, sin que el usuario tenga que escribir a ciegas preguntando "¿tenés esto en talle A2?".</p>
+          <p>Cada producto que ves acá está pensado para el uso real arriba del tatami: kimonos, rashguards, cinturones, shorts y accesorios que usamos y recomendamos nosotros mismos.</p>
+          <p>No vendemos online ni procesamos pagos en el sitio: cuando encontrás lo que buscás, te ponemos en contacto directo por WhatsApp con el vendedor para coordinar todo — disponibilidad, forma de pago y entrega.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Lo que nos importa</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-item">
+          <h3>Información real</h3>
+          <p>Cada ficha muestra únicamente los talles y colores que ese producto realmente tiene disponibles.</p>
+        </div>
+        <div class="value-item">
+          <h3>Trato directo</h3>
+          <p>Sin pasarelas de pago ni carritos: hablás directo con el vendedor y coordinan todo entre ustedes.</p>
+        </div>
+        <div class="value-item">
+          <h3>Foco en el deporte</h3>
+          <p>Elegimos cada producto pensando en el entrenamiento diario y la competencia, no solo en la estética.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="cta-band-inner">
+      <div>
+        <h2>Dale una vuelta al catálogo</h2>
+        <p>Kimonos, rashguards, cinturones, shorts y accesorios, todo en un solo lugar.</p>
+      </div>
+      <a href="catalogo.html" class="btn btn-primary">Ver catálogo</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="brand">Not<span>App</span></a>
+      <p class="footer-about">Catálogo online de equipamiento para Jiu-Jitsu. Consultá disponibilidad y coordiná tu compra directo con el vendedor por WhatsApp.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Categorías</h4>
+      <ul id="footerCategorias"></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Sitio</h4>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Productos</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <div class="footer-contact-item">
+        <strong>WhatsApp</strong>
+        <a id="footerWhatsapp" href="#" target="_blank" rel="noopener" data-whatsapp-numero-visible>11 5176-0505</a>
+      </div>
+      <div class="footer-contact-item">
+        <strong>Atención</strong>
+        <span>Lunes a sábado, consultas por WhatsApp</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <span>© <span id="footerYear"></span> NotApp — Catálogo online de Jiu-Jitsu</span>
+      <span>Este sitio no realiza ventas ni pagos online. La compra se coordina por WhatsApp.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/nav.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", async function () {
+    const fw = document.getElementById("footerWhatsapp");
+    if (fw) fw.href = await construirLinkWhatsApp(mensajeContactoGeneral());
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "framework": null,
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/paneladmin", "destination": "/paneladmin/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/paneladmin/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+        { "key": "Cache-Control", "value": "no-cache" }
+      ]
+    }
+  ]
+}

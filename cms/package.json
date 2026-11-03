@@ -1,0 +1,16 @@
+{
+  "name": "notapp-catalogo",
+  "version": "2.0.0",
+  "description": "Catálogo NotApp con panel de administración (CMS). PostgreSQL en Supabase, publicado en Vercel.",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "pg": "^8.13.0"
+  }
+}
