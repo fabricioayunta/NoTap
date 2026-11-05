@@ -6,6 +6,7 @@
 
 const pg = require("./pg");
 const auth = require("./auth");
+const P = require("./personalizacion");
 const S = require("./stock");
 const storage = require("./storage");
 
@@ -188,7 +189,8 @@ async function leerConfigCruda() {
     nombreSitio: m.nombre_sitio || "NotApp",
     logoUrl: m.logo_ruta || null,
     whatsappNumero: m.whatsapp_numero || "1151760505",
-    stockBajoGeneral: isFinite(n) ? n : S.STOCK_BAJO_DEFECTO
+    stockBajoGeneral: isFinite(n) ? n : S.STOCK_BAJO_DEFECTO,
+    personalizacion: P.leer(m.personalizacion)
   };
 }
 
@@ -199,7 +201,7 @@ async function getConfigAdmin() {
 
 async function getConfig() {
   const c = await getConfigAdmin();
-  return { nombreSitio: c.nombreSitio, logoUrl: c.logoUrl, whatsappNumero: c.whatsappNumero };
+  return { nombreSitio: c.nombreSitio, logoUrl: c.logoUrl, whatsappNumero: c.whatsappNumero, personalizacion: c.personalizacion };
 }
 
 async function getAdmin() {
@@ -353,6 +355,17 @@ async function actualizarConfig(datos) {
   return leerConfigCruda();
 }
 
+async function guardarPersonalizacion(entrada) {
+  await iniciar();
+  const nueva = P.limpiar(entrada);
+  const antes = P.urlsDeImagenes((await leerConfigCruda()).personalizacion);
+  await pg.tx(function (c) { return guardarClave(c, "personalizacion", JSON.stringify(nueva)); });
+  const usadas = P.urlsDeImagenes(nueva);
+  const sobran = antes.filter(function (u) { return usadas.indexOf(u) === -1; });
+  if (sobran.length) storage.borrarImagenes(sobran);
+  return nueva;
+}
+
 async function cambiarPassword(passwordActual, passwordNueva) {
   await iniciar();
   const admin = await getAdmin();
@@ -381,6 +394,7 @@ module.exports = {
   actualizarCategoria: actualizarCategoria,
   eliminarCategoria: eliminarCategoria,
   actualizarConfig: actualizarConfig,
+  guardarPersonalizacion: guardarPersonalizacion,
   cambiarPassword: cambiarPassword,
   _escribirProducto: escribirProducto
 };

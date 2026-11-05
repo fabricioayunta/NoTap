@@ -60,6 +60,9 @@ function obtenerProductosPorCategoria(productos, catId) {
 async function construirLinkWhatsApp(mensaje) {
   const config = await obtenerConfig();
   const intl = "549" + config.whatsappNumero;
+  // El mensaje general se puede cambiar desde Personalización
+  const propio = config.personalizacion && config.personalizacion.textos && config.personalizacion.textos.wa_mensaje;
+  if (mensaje === MENSAJE_GENERAL_DEFECTO && propio) mensaje = propio;
   return "https://wa.me/" + intl + "?text=" + encodeURIComponent(mensaje);
 }
 
@@ -78,8 +81,9 @@ function mensajeConsultaProducto(producto, talle, colorNombre, cantidad) {
   return lineas.join("\n");
 }
 
+const MENSAJE_GENERAL_DEFECTO = "Hola! Te escribo desde la página de NotApp, quería hacer una consulta.";
 function mensajeContactoGeneral() {
-  return "Hola! Te escribo desde la página de NotApp, quería hacer una consulta.";
+  return MENSAJE_GENERAL_DEFECTO;
 }
 
 /* Ícono SVG (línea) según categoría — se usa como imagen del producto
@@ -151,9 +155,18 @@ async function aplicarMarcaSitio() {
     brands.forEach(function (el) {
       if (config.logoUrl) {
         el.innerHTML = '<img src="' + config.logoUrl + '" alt="' + (config.nombreSitio || "NotApp") + '">';
+      } else if (config.nombreSitio && config.nombreSitio !== "NotApp") {
+        // Sin logo: se muestra el nombre del sitio (la última palabra con el color de acento).
+        const palabras = config.nombreSitio.split(" ");
+        const ultima = palabras.pop();
+        el.textContent = palabras.length ? palabras.join(" ") + " " : "";
+        const sp = document.createElement("span");
+        sp.textContent = ultima;
+        el.appendChild(sp);
       }
-      // Si no hay logo subido, se deja el texto que ya trae el HTML.
+      // Sin logo y con el nombre original, se deja el texto que ya trae el HTML.
     });
+    if (window.aplicarPersonalizacionSitio) window.aplicarPersonalizacionSitio(config);
     document.querySelectorAll("[data-whatsapp-numero-visible]").forEach(function (el) {
       const n = config.whatsappNumero || "";
       el.textContent = n.length === 10 ? n.slice(0, 2) + " " + n.slice(2, 6) + "-" + n.slice(6) : n;

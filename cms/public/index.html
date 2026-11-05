@@ -47,12 +47,12 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-copy">
-        <span class="hero-eyebrow">Catálogo online</span>
-        <h1>Equipamiento de Jiu-Jitsu para <em>entrenar en serio</em></h1>
-        <p class="hero-lead">Kimonos, rashguards, cinturones y accesorios pensados para el tatami. Elegí tu producto, seleccioná las opciones y consultá directo por WhatsApp con el vendedor.</p>
+        <span class="hero-eyebrow" data-c="hero_eyebrow">Catálogo online</span>
+        <h1 data-c="hero_titulo">Equipamiento de Jiu-Jitsu para <em>entrenar en serio</em></h1>
+        <p class="hero-lead" data-c="hero_bajada">Kimonos, rashguards, cinturones y accesorios pensados para el tatami. Elegí tu producto, seleccioná las opciones y consultá directo por WhatsApp con el vendedor.</p>
         <div class="hero-actions">
-          <a href="catalogo.html" class="btn btn-primary">Ver catálogo</a>
-          <a href="contacto.html" class="btn btn-outline-light">Contactar al vendedor</a>
+          <a href="catalogo.html" class="btn btn-primary" data-c="hero_btn1">Ver catálogo</a>
+          <a href="contacto.html" class="btn btn-outline-light" data-c="hero_btn2">Contactar al vendedor</a>
         </div>
       </div>
       <div class="hero-visual">
@@ -62,51 +62,51 @@
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section section-alt" data-seccion="valores">
     <div class="container">
       <div class="section-heading">
-        <h2>Por qué comprar acá</h2>
+        <h2 data-c="valores_titulo">Por qué comprar acá</h2>
       </div>
       <div class="value-grid">
         <div class="value-card">
           <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-          <h3>Consulta directa</h3>
-          <p>Elegís el producto y hablás directo con el vendedor por WhatsApp, sin intermediarios.</p>
+          <h3 data-c="valor1_t">Consulta directa</h3>
+          <p data-c="valor1_d">Elegís el producto y hablás directo con el vendedor por WhatsApp, sin intermediarios.</p>
         </div>
         <div class="value-card">
           <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 2v4M16 2v4M4 10h16"/></svg>
-          <h3>Talles y colores reales</h3>
-          <p>Cada producto muestra únicamente los talles y colores que realmente tiene disponibles.</p>
+          <h3 data-c="valor2_t">Talles y colores reales</h3>
+          <p data-c="valor2_d">Cada producto muestra únicamente los talles y colores que realmente tiene disponibles.</p>
         </div>
         <div class="value-card">
           <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v4H4zM4 12h10v8H4zM17 12h3v8h-3z"/></svg>
-          <h3>Todas las categorías</h3>
-          <p>Kimonos, rashguards, cinturones, shorts y accesorios en un solo catálogo ordenado.</p>
+          <h3 data-c="valor3_t">Todas las categorías</h3>
+          <p data-c="valor3_d">Kimonos, rashguards, cinturones, shorts y accesorios en un solo catálogo ordenado.</p>
         </div>
         <div class="value-card">
           <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.4-4.9-2.6-4.9 2.6.9-5.4-4-3.9 5.5-.8z"/></svg>
-          <h3>Enfocado en calidad</h3>
-          <p>Productos pensados para el entrenamiento diario y la competencia, sin vueltas.</p>
+          <h3 data-c="valor4_t">Enfocado en calidad</h3>
+          <p data-c="valor4_d">Productos pensados para el entrenamiento diario y la competencia, sin vueltas.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" data-seccion="categorias">
     <div class="container">
       <div class="section-heading">
-        <h2>Categorías</h2>
-        <a href="catalogo.html" class="link-more">Ver catálogo completo</a>
+        <h2 data-c="cat_titulo">Categorías</h2>
+        <a href="catalogo.html" class="link-more" data-c="cat_link">Ver catálogo completo</a>
       </div>
       <div class="cat-grid" id="catGrid"></div>
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section section-alt" data-seccion="destacados">
     <div class="container">
       <div class="section-heading">
-        <h2>Productos destacados</h2>
-        <a href="catalogo.html" class="link-more">Ver todos los productos</a>
+        <h2 data-c="destacados_titulo">Productos destacados</h2>
+        <a href="catalogo.html" class="link-more" data-c="destacados_link">Ver todos los productos</a>
       </div>
 
       <div class="carrusel-contenedor">
@@ -119,13 +119,13 @@
     </div>
   </section>
 
-  <section class="cta-band">
+  <section class="cta-band" data-seccion="cta">
     <div class="cta-band-inner">
       <div>
-        <h2>¿Ya sabés qué producto necesitás?</h2>
-        <p>Escribinos por WhatsApp y te ayudamos a elegir talle y color.</p>
+        <h2 data-c="cta_titulo">¿Ya sabés qué producto necesitás?</h2>
+        <p data-c="cta_texto">Escribinos por WhatsApp y te ayudamos a elegir talle y color.</p>
       </div>
-      <a id="ctaWhatsapp" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp">
+      <a id="ctaWhatsapp" data-c="cta_boton" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm5.8 14.2c-.2.6-1.4 1.2-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .5 0 .7.5.3.6.9 2.1 1 2.2.1.2.1.4 0 .6-.1.2-.2.3-.3.5-.2.2-.3.3-.5.5-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.7-.1.3.1 1.8.9 2.1 1 .3.1.5.2.6.3.1.2.1.9-.1 1.5z"/></svg>
         Escribir por WhatsApp
       </a>
@@ -161,18 +161,20 @@
       </div>
       <div class="footer-contact-item">
         <strong>Atención</strong>
-        <span>Lunes a sábado, consultas por WhatsApp</span>
+        <span data-c="footer_atencion">Lunes a sábado, consultas por WhatsApp</span>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
     <div class="footer-bottom-inner">
-      <span>© <span id="footerYear"></span> NotApp — Catálogo online de Jiu-Jitsu</span>
+      <span>© <span id="footerYear"></span> <span data-nombre>NotApp</span> — <span data-c="footer_lema">Catálogo online de Jiu-Jitsu</span></span>
       <span>Este sitio no realiza ventas ni pagos online. La compra se coordina por WhatsApp.</span>
     </div>
   </div>
 </footer>
 
+<script src="js/personalizacion-campos.js"></script>
+<script src="js/personalizar.js"></script>
 <script src="js/api.js"></script>
 <script src="js/nav.js"></script>
 <script src="js/home.js"></script>

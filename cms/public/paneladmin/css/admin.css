@@ -731,3 +731,67 @@ a { color: inherit; }
 @media (max-width: 980px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+
+/* ================= Personalización ================= */
+
+.pers-bar { display: flex; align-items: center; gap: 12px; justify-content: flex-end; flex-wrap: wrap; margin-bottom: 18px; position: sticky; top: 0; z-index: 20; background: var(--paper); padding: 10px 0; }
+.pers-estado { margin-right: auto; font-size: 0.88rem; color: var(--text-muted); }
+.pers-estado.pers-sucio { color: #a35a00; font-weight: 600; }
+.pers-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; border-bottom: 1px solid var(--line); }
+.pers-tab { background: none; border: 0; padding: 10px 16px; font: inherit; font-weight: 600; color: var(--text-muted); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1px; }
+.pers-tab.activo { color: var(--ink); border-bottom-color: var(--gold); }
+#persPanel .admin-card { margin-bottom: 20px; grid-column: auto; }
+.pers-cols { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+.pers-sticky { position: sticky; top: 70px; }
+.pers-paletas { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.pers-paleta { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; background: #fff; border: 1.5px solid var(--line); border-radius: 8px; padding: 8px; cursor: pointer; font: inherit; text-align: left; }
+.pers-paleta:hover { border-color: var(--ink); }
+.pers-paleta em { font-style: normal; font-size: 0.8rem; width: 100%; margin-top: 4px; }
+.pers-sw { width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(0,0,0,.15); display: inline-block; }
+.pers-color { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.pers-color small { display: block; color: var(--text-muted); font-size: 0.78rem; margin-top: 2px; max-width: 34ch; }
+.pers-color-ctrl { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.pers-color-ctrl input[type=color] { width: 44px; height: 38px; padding: 2px; border: 1px solid var(--line); border-radius: 6px; background: #fff; cursor: pointer; }
+.pers-hex { width: 96px !important; font-family: monospace; }
+#persResetColores, #persResetLetras { margin-top: 14px; }
+
+.pers-preview { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--paper); color: var(--text); font-family: var(--font-body); font-size: 13px; }
+.pers-preview .pv-header { background: var(--ink); color: var(--text-on-ink); display: flex; gap: 14px; align-items: center; padding: 12px 14px; }
+.pers-preview .pv-brand { font-family: var(--font-display); font-size: 18px; margin-right: auto; color: var(--gold); }
+.pers-preview .pv-hero { background: var(--ink); color: var(--text-on-ink); padding: 22px 16px 24px; }
+.pers-preview .pv-hero small { color: var(--gold); font-weight: 600; letter-spacing: .06em; }
+.pers-preview .pv-hero h3 { font-family: var(--font-display); font-size: 26px; line-height: 1.1; margin: 8px 0; }
+.pers-preview .pv-hero em { font-style: normal; color: var(--gold); }
+.pers-preview .pv-hero p { color: var(--text-on-ink-muted); margin: 0 0 14px; }
+.pers-preview .pv-btn { display: inline-block; background: var(--gold); color: var(--on-gold); padding: 8px 14px; border-radius: var(--radius); font-weight: 700; }
+.pers-preview .pv-btn-out { background: transparent; border: 1.5px solid var(--text-on-ink); color: var(--text-on-ink); padding: 6.5px 12.5px; }
+.pers-preview .pv-body { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 14px; }
+.pers-preview .pv-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 12px; display: grid; gap: 4px; position: relative; }
+.pers-preview .pv-card b { font-family: var(--font-display); font-size: 15px; }
+.pers-preview .pv-tag { position: absolute; top: 8px; right: 8px; background: var(--crimson); color: #fff; font-style: normal; font-size: 10px; padding: 2px 6px; border-radius: var(--radius); }
+
+.pers-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.pers-chip { border: 1.5px solid var(--line); background: #fff; border-radius: 20px; padding: 7px 14px; font: inherit; font-size: 0.85rem; cursor: pointer; }
+.pers-chip.activo { background: var(--ink); color: #fff; border-color: var(--ink); }
+.pers-ayuda { color: var(--text-muted); font-size: 0.78rem; }
+#persPanel textarea.admin-input { resize: vertical; font-family: inherit; }
+
+.pers-imgs { display: grid; gap: 16px; }
+.pers-img { display: flex; gap: 16px; align-items: center; }
+.pers-thumb { width: 160px; height: 100px; flex-shrink: 0; border: 1.5px dashed var(--line); border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; color: var(--text-muted); font-size: 0.8rem; background: var(--paper); }
+.pers-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.pers-img-info small { display: block; color: var(--text-muted); margin: 2px 0 10px; font-size: 0.8rem; }
+.pers-radio, .pers-check { display: flex; gap: 8px; align-items: center; padding: 6px 0; cursor: pointer; }
+.pers-gal { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 14px; }
+.pers-gal-item { display: grid; gap: 6px; }
+.pers-gal-item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; }
+.pers-faq { display: grid; gap: 14px; margin: 14px 0; }
+.pers-faq-item { display: grid; gap: 6px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; }
+.pers-faq-item .btn-admin { justify-self: start; }
+
+@media (max-width: 900px) {
+  .pers-cols { grid-template-columns: 1fr; }
+  .pers-sticky { position: static; }
+  .pers-img { flex-direction: column; align-items: flex-start; }
+}

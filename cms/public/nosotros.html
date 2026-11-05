@@ -49,22 +49,22 @@
       <nav class="breadcrumbs" aria-label="Ruta de navegación">
         <a href="index.html">Inicio</a><span class="sep">/</span><span class="current">Nosotros</span>
       </nav>
-      <h1>Hecho por gente que entrena</h1>
-      <p>NotApp nació de la necesidad de encontrar equipamiento de calidad sin vueltas: un catálogo claro, con información real de cada producto, y una forma simple de consultar antes de comprar.</p>
+      <h1 data-c="nos_titulo">Hecho por gente que entrena</h1>
+      <p data-c="nos_bajada">NotApp nació de la necesidad de encontrar equipamiento de calidad sin vueltas: un catálogo claro, con información real de cada producto, y una forma simple de consultar antes de comprar.</p>
     </div>
   </section>
 
   <section class="section section-alt">
     <div class="container">
       <div class="split-block">
-        <div class="split-visual">
+        <div class="split-visual" data-img="nosotros_imagen">
           <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M35 18 L50 28 L65 18 L78 30 L68 42 L68 85 L32 85 L32 42 L22 30 Z"/><path d="M50 28 L50 50"/></svg>
         </div>
         <div>
-          <h2>Nuestra historia</h2>
-          <p>Empezamos armando este catálogo para resolver algo simple: mostrar el equipamiento de forma clara, con fotos, talles y colores reales, sin que el usuario tenga que escribir a ciegas preguntando "¿tenés esto en talle A2?".</p>
-          <p>Cada producto que ves acá está pensado para el uso real arriba del tatami: kimonos, rashguards, cinturones, shorts y accesorios que usamos y recomendamos nosotros mismos.</p>
-          <p>No vendemos online ni procesamos pagos en el sitio: cuando encontrás lo que buscás, te ponemos en contacto directo por WhatsApp con el vendedor para coordinar todo — disponibilidad, forma de pago y entrega.</p>
+          <h2 data-c="historia_titulo">Nuestra historia</h2>
+          <p data-c="historia_p1">Empezamos armando este catálogo para resolver algo simple: mostrar el equipamiento de forma clara, con fotos, talles y colores reales, sin que el usuario tenga que escribir a ciegas preguntando "¿tenés esto en talle A2?".</p>
+          <p data-c="historia_p2">Cada producto que ves acá está pensado para el uso real arriba del tatami: kimonos, rashguards, cinturones, shorts y accesorios que usamos y recomendamos nosotros mismos.</p>
+          <p data-c="historia_p3">No vendemos online ni procesamos pagos en el sitio: cuando encontrás lo que buscás, te ponemos en contacto directo por WhatsApp con el vendedor para coordinar todo — disponibilidad, forma de pago y entrega.</p>
         </div>
       </div>
     </div>
@@ -73,20 +73,20 @@
   <section class="section">
     <div class="container">
       <div class="section-heading">
-        <h2>Lo que nos importa</h2>
+        <h2 data-c="importa_titulo">Lo que nos importa</h2>
       </div>
       <div class="values-grid">
         <div class="value-item">
-          <h3>Información real</h3>
-          <p>Cada ficha muestra únicamente los talles y colores que ese producto realmente tiene disponibles.</p>
+          <h3 data-c="imp1_t">Información real</h3>
+          <p data-c="imp1_d">Cada ficha muestra únicamente los talles y colores que ese producto realmente tiene disponibles.</p>
         </div>
         <div class="value-item">
-          <h3>Trato directo</h3>
-          <p>Sin pasarelas de pago ni carritos: hablás directo con el vendedor y coordinan todo entre ustedes.</p>
+          <h3 data-c="imp2_t">Trato directo</h3>
+          <p data-c="imp2_d">Sin pasarelas de pago ni carritos: hablás directo con el vendedor y coordinan todo entre ustedes.</p>
         </div>
         <div class="value-item">
-          <h3>Foco en el deporte</h3>
-          <p>Elegimos cada producto pensando en el entrenamiento diario y la competencia, no solo en la estética.</p>
+          <h3 data-c="imp3_t">Foco en el deporte</h3>
+          <p data-c="imp3_d">Elegimos cada producto pensando en el entrenamiento diario y la competencia, no solo en la estética.</p>
         </div>
       </div>
     </div>
@@ -95,10 +95,10 @@
   <section class="cta-band">
     <div class="cta-band-inner">
       <div>
-        <h2>Dale una vuelta al catálogo</h2>
-        <p>Kimonos, rashguards, cinturones, shorts y accesorios, todo en un solo lugar.</p>
+        <h2 data-c="noscta_titulo">Dale una vuelta al catálogo</h2>
+        <p data-c="noscta_texto">Kimonos, rashguards, cinturones, shorts y accesorios, todo en un solo lugar.</p>
       </div>
-      <a href="catalogo.html" class="btn btn-primary">Ver catálogo</a>
+      <a href="catalogo.html" class="btn btn-primary" data-c="noscta_boton">Ver catálogo</a>
     </div>
   </section>
 
@@ -131,18 +131,20 @@
       </div>
       <div class="footer-contact-item">
         <strong>Atención</strong>
-        <span>Lunes a sábado, consultas por WhatsApp</span>
+        <span data-c="footer_atencion">Lunes a sábado, consultas por WhatsApp</span>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
     <div class="footer-bottom-inner">
-      <span>© <span id="footerYear"></span> NotApp — Catálogo online de Jiu-Jitsu</span>
+      <span>© <span id="footerYear"></span> <span data-nombre>NotApp</span> — <span data-c="footer_lema">Catálogo online de Jiu-Jitsu</span></span>
       <span>Este sitio no realiza ventas ni pagos online. La compra se coordina por WhatsApp.</span>
     </div>
   </div>
 </footer>
 
+<script src="js/personalizacion-campos.js"></script>
+<script src="js/personalizar.js"></script>
 <script src="js/api.js"></script>
 <script src="js/nav.js"></script>
 <script>

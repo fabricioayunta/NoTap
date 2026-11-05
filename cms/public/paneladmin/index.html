@@ -33,6 +33,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg>
         Categorías
       </button>
+      <button type="button" class="admin-nav-item" data-view="personalizacion">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.4A3.6 3.6 0 0 0 21 11C21 6.6 16.9 3 12 3z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/></svg>
+        Personalización
+      </button>
       <button type="button" class="admin-nav-item" data-view="config">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.6V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.6 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.6 1z"/></svg>
         Configuración
@@ -160,6 +164,23 @@
           <tbody id="tablaCategorias"></tbody>
         </table>
       </div>
+    </section>
+
+    <!-- ================= PERSONALIZACIÓN ================= -->
+    <section class="admin-view" id="view-personalizacion" hidden>
+      <header class="admin-view-header">
+        <h1>Personalización</h1>
+        <p>Cambiá colores, letras, fotos, textos y secciones del sitio. Lo que no cambies queda como está.</p>
+      </header>
+
+      <div class="pers-bar">
+        <span class="pers-estado" id="persEstado">Sin cambios</span>
+        <a href="/index.html" target="_blank" class="btn-admin btn-admin-outline">Ver el sitio ↗</a>
+        <button type="button" class="btn-admin btn-admin-primary" id="persGuardar">Guardar cambios</button>
+      </div>
+
+      <div class="pers-tabs" id="persTabs"></div>
+      <div id="persPanel"></div>
     </section>
 
     <!-- ================= CONFIGURACIÓN ================= -->
@@ -397,6 +418,8 @@
 
 <div class="admin-toast" id="adminToast" hidden></div>
 
+<script src="/js/personalizacion-campos.js"></script>
+<script src="/paneladmin/js/personalizacion.js"></script>
 <script src="/paneladmin/js/admin.js" data-page="dashboard"></script>
 </body>
 </html>

@@ -15,7 +15,12 @@ const EXT = { "image/png": ".png", "image/jpeg": ".jpg", "image/jpg": ".jpg", "i
 function usaSupabase() {
   return !!(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_KEY);
 }
-function baseUrl() { return process.env.SUPABASE_URL.replace(/\/+$/, ""); }
+function baseUrl() {
+  // Solo se usa el dominio (https://xxxx.supabase.co): si pegaron la URL con /rest/v1 u otro tramo, se descarta.
+  let u = String(process.env.SUPABASE_URL || "").trim();
+  if (!/^https?:\/\//i.test(u)) u = "https://" + u;
+  try { return new URL(u).origin; } catch (e) { return u.replace(/\/+$/, ""); }
+}
 function bucket() { return process.env.SUPABASE_BUCKET || "notapp"; }
 function cabeceras(extra) {
   const key = process.env.SUPABASE_SERVICE_KEY;
@@ -27,14 +32,14 @@ function cabeceras(extra) {
 let bucketListo = false;
 async function asegurarBucket() {
   if (bucketListo) return;
-  const r = await fetch(baseUrl() + "/storage/v1/bucket", {
-    method: "POST",
-    headers: cabeceras({ "Content-Type": "application/json" }),
-    body: JSON.stringify({ id: bucket(), name: bucket(), public: true })
-  });
-  if (r.ok || r.status === 409 || r.status === 400) { bucketListo = true; return; } // 400/409: ya existe
-  const t = await r.text();
-  throw new Error("No se pudo preparar el almacenamiento de fotos (" + r.status + "): " + t.slice(0, 160));
+  try {
+    const r = await fetch(baseUrl() + "/storage/v1/bucket", {
+      method: "POST",
+      headers: cabeceras({ "Content-Type": "application/json" }),
+      body: JSON.stringify({ id: bucket(), name: bucket(), public: true })
+    });
+    if (r.ok || r.status === 409 || r.status === 400) bucketListo = true; // 400/409: ya existe
+  } catch (e) { /* si no se pudo crear, se intenta subir igual: el error real aparece al subir */ }
 }
 
 /** Guarda una imagen en base64 (dataURL) y devuelve su URL pública. */

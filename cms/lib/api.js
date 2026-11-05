@@ -1,5 +1,5 @@
 /* ==========================================================================
-   NotApp CMS — API (la usan server.js en local y api/[...path].js en Vercel)
+   NotApp CMS — API (la usan server.js en local y api/index.js en Vercel)
    ========================================================================== */
 
 const db = require("./db");
@@ -208,6 +208,14 @@ async function procesar(req, res, url) {
       let config;
       try { config = await db.actualizarConfig(body); } catch (e) { return enviarJSON(res, 400, { error: e.message }); }
       return enviarJSON(res, 200, { config: config });
+    }
+
+    // Personalización del sitio (colores, fuentes, textos, imágenes, secciones)
+    if (metodo === "PUT" && url.pathname === "/api/admin/personalizacion") {
+      let body;
+      try { body = await leerBodyJSON(req, 512 * 1024); } catch (e) { return enviarJSON(res, 400, { error: e.message }); }
+      const personalizacion = await db.guardarPersonalizacion(body);
+      return enviarJSON(res, 200, { personalizacion: personalizacion });
     }
 
     // Subida de imagen de producto (galería o principal)

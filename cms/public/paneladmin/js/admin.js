@@ -147,6 +147,9 @@ if (PAGINA === "dashboard") {
     inicializarStock();
     inicializarCategorias();
     inicializarConfig();
+    if (typeof iniciarPersonalizacion === "function") {
+      iniciarPersonalizacion({ inicial: config.personalizacion, nombreSitio: config.nombreSitio, toast: mostrarToast, apiFetch: apiFetch, subirImagen: subirImagen });
+    }
     inicializarModales();
     inicializarLogout();
 
